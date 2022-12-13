@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  backend:
+    image: backend-for-frontend
+    build: ./backend
+    environment:
+      - OKTA_DOMAIN=${OKTA_DOMAIN}
+      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
+      - OKTA_CLIENT_SECRET=${OKTA_CLIENT_SECRET}
+    networks:
+      - backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/usr/src/app
+
+  nginx:  
+    image: "nginx:latest"
+    container_name: 'vue-spa'
+    hostname: 'vue-spa'
+    networks:
+      - backend
+    ports: 
+      - "7000:80"
+    volumes:
+      - ./nginx.local.conf:/etc/nginx/conf.d/default.conf
+      - ./spa/dist:/mnt/app/static
+
+networks:
+  backend:
+    driver: bridge
+

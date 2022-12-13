@@ -1,0 +1,16 @@
+{
+  "name": "vue-bff",
+  "version": "0.1.1",
+  "description": "A VueJS SPA with an Express.js Backend For Frontend",
+  "author": "brett@brettlischalk.com",
+  "dependencies": {
+    "create-vue": "^3.5.0"
+  },
+  "engines": {
+    "node": ">=16.6.2"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "docker-compose -f docker-compose.yaml up"
+  }
+}

@@ -5,6 +5,8 @@ const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 const session = require('express-session');
 const passport = require('passport');
 const OAuth2Strategy = require('passport-oauth2');
+const jwt = require('jsonwebtoken');
+const axios = require('axios');
 
 const config = {
     name: 'sample-express-app', port: 3000,
@@ -97,6 +99,27 @@ app.get('/auth/content',
   (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({ message: "This is top secret authenticated content" }));
+});
+
+function generateAccessToken(payload) {
+  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1800s' });
+}
+
+app.get('/auth/proxied',
+  loggedIn,
+  async (req, res) => {
+    const token = generateAccessToken({ some: 'data' });
+    try {
+      const resp = await axios.get('http://proxied:4000/auth/proxied', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(resp.data));
+    } catch(err) {
+      res.setHeader('Content-Type', 'application/json');
+      console.log(err);
+      res.status(500).send(JSON.stringify({ message: "Something went wrong" }));
+    }
 });
 
 app.listen(config.port, config.host, (e)=> {

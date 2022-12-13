@@ -7,12 +7,27 @@ services:
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_CLIENT_SECRET=${OKTA_CLIENT_SECRET}
+      - JWT_SECRET=${JWT_SECRET}
     networks:
       - backend
     ports:
       - "3000:3000"
     volumes:
       - ./backend:/usr/src/app
+
+  proxied:
+    image: proxied-service
+    build: ./proxied
+    environment:
+      - OKTA_DOMAIN=${OKTA_DOMAIN}
+      - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - backend
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./proxied:/usr/src/app
 
   nginx:  
     image: "nginx:latest"

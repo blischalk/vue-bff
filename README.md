@@ -28,8 +28,8 @@ session timeout, secure flag on session cookie, etc.
 
 ## References
 
-https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps#name-security-considerations
-https://auth0.com/docs/secure/security-guidance/data-security/token-storage
-https://www.pingidentity.com/en/resources/blog/post/refresh-token-rotation-spa.html
-https://auth0.com/blog/backend-for-frontend-pattern-with-auth0-and-dotnet/
+- https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps#name-security-considerations
+- https://auth0.com/docs/secure/security-guidance/data-security/token-storage
+- https://www.pingidentity.com/en/resources/blog/post/refresh-token-rotation-spa.html
+- https://auth0.com/blog/backend-for-frontend-pattern-with-auth0-and-dotnet/
 

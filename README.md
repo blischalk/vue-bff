@@ -16,6 +16,8 @@ server.
 - Assign a user to the application
 - Copy .env.example to .env
 - Populate .env with Okta information and a JWT signing key of your choosing
+- From the backend directory run `npm install`
+- From the proxied directory run `npm install`
 - From the spa directory run `npm install` and `npm run build`
 - In another terminal window form the root of the project run `docker-compose up --build`
 - Visit the application in your browser at http://localhost:7000
